@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANN GURU EDUSAT - Delhi Police Constable CBT</title>
+  <style>
+    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+    body { background: #eef2f7; color: #222; }
+    .hidden { display: none !important; }
+
+    /* Top Official SSC Style Header */
+    .top-header {
+      background: linear-gradient(90deg, #0b1f3a 0%, #1a3a6c 100%);
+      color: #fff; padding: 10px 25px; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 4px solid #f5b041; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .brand-box { display: flex; align-items: center; gap: 12px; }
+    .brand-badge {
+      background: #f5b041; color: #0b1f3a; font-weight: 900; padding: 6px 12px;
+      border-radius: 6px; font-size: 18px; letter-spacing: 1px;
+    }
+    .brand-title h1 { font-size: 20px; letter-spacing: 0.5px; }
+    .brand-title p { font-size: 12px; color: #f5b041; font-weight: bold; }
+    .sys-info { text-align: right; font-size: 13px; }
+    .sys-info span { color: #f5b041; font-weight: bold; font-size: 16px; }
+
+    /* SCREEN 1: ATTRACTIVE FIRST PAGE (LOGIN + EXAM HIGHLIGHTS) */
+    .hero-wrapper {
+      max-width: 1050px; margin: 30px auto; display: grid;
+      grid-template-columns: 1.3fr 1fr; gap: 25px; padding: 0 15px;
+    }
+    @media (max-width: 800px) { .hero-wrapper { grid-template-columns: 1fr; } }
+
+    .promo-card {
+      background: linear-gradient(135deg, #102542 0%, #1d4e89 100%);
+      color: white; border-radius: 12px; padding: 30px;
+      box-shadow: 0 8px 20px rgba(16,37,66,0.25); position: relative; overflow: hidden;
+    }
+    .dp-tag {
+      display: inline-block; background: #e63946; color: white; padding: 5px 14px;
+      border-radius: 20px; font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .promo-card h2 { font-size: 28px; margin-bottom: 10px; line-height: 1.3; color: #fff; }
+    .promo-card p { font-size: 14px; color: #d0dff2; margin-bottom: 22px; line-height: 1.6; }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .stat-box {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      padding: 12px 15px; border-radius: 8px;
+    }
+    .stat-box h3 { font-size: 20px; color: #f5b041; }
+    .stat-box span { font-size: 12px; color: #e0e8f5; }
+
+    .sec-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .pill { background: rgba(0,0,0,0.3); padding: 6px 12px; border-radius: 6px; font-size: 12px; border-left: 3px solid #f5b041; }
+
+    /* SSC Terminal Login Card */
+    .login-card {
+      background: #fff; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12); border: 1px solid #d9e2ec;
+    }
+    .login-card-header {
+      background: #2b579a; color: white; padding: 14px 20px;
+      font-weight: bold; font-size: 16px; display: flex; justify-content: space-between;
+    }
+    .login-body { padding: 25px; text-align: center; }
+    .avatar-circle {
+      width: 85px; height: 85px; border-radius: 50%; background: #e3edf7;
+      border: 3px solid #2b579a; margin: 0 auto 15px; display: flex;
+      align-items: center; justify-content: center; font-size: 36px; color: #2b579a; font-weight: bold;
+    }
+    .input-group { text-align: left; margin-bottom: 15px; }
+    .input-group label { display: block; font-size: 13px; font-weight: bold; color: #444; margin-bottom: 5px; }
+    .input-group input {
+      width: 100%; padding: 11px 12px; border: 1px solid #b0c4de;
+      border-radius: 6px; font-size: 15px; outline: none;
+    }
+    .input-group input:focus { border-color: #2b579a; box-shadow: 0 0 5px rgba(43,87,154,0.3); }
+    .btn-signin {
+      width: 100%; background: #2b579a; color: white; border: none; padding: 13px;
+      font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.2s;
+    }
+    .btn-signin:hover { background: #1a3a6c; }
+
+    /* SCREEN 2: OFFICIAL SSC INSTRUCTIONS PAGE */
+    .inst-container {
+      max-width: 980px; margin: 20px auto; background: #fff;
+      border-radius: 8px; box-shadow: 0 3px 12px rgba(0,0,0,0.1); overflow: hidden;
+    }
+    .inst-header { background: #2b579a; color: white; padding: 12px 20px; font-size: 18px; font-weight: bold; }
+    .inst-content { padding: 20px 25px; max-height: 68vh; overflow-y: auto; line-height: 1.7; font-size: 14px; }
+    .pattern-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    .pattern-table th, .pattern-table td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+    .pattern-table th { background: #f0f4f8; color: #102542; }
+    .legend-row { display: flex; align-items: center; gap: 12px; margin: 8px 0; }
+    .sym { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; border-radius: 4px; font-size: 13px; }
+    .sym-grey { background: #e0e0e0; border: 1px solid #999; color: #000; }
+    .sym-red { background: #d9534f; color: #fff; }
+    .sym-green { background: #5cb85c; color: #fff; }
+    .sym-purple { background: #6f42c1; color: #fff; border-radius: 50%; }
+    .inst-footer { background: #f8f9fa; padding: 15px 25px; border-top: 2px solid #dee2e6; }
+    .begin-btn {
+      background: #28a745; color: white; border: none; padding: 12px 28px;
+      font-size: 16px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 12px;
+    }
+
+    /* SCREEN 3: REAL SSC EXAM INTERFACE */
+    .exam-layout { display: grid; grid-template-columns: 1fr 300px; min-height: calc(100vh - 62px); }
+    @media (max-width: 850px) { .exam-layout { grid-template-columns: 1fr; } }
+    .exam-left { background: #fff; display: flex; flex-direction: column; justify-content: space-between; border-right: 2px solid #ccc; }
+    
+    /* Section Tabs */
+    .sec-bar { background: #e9ecef; display: flex; flex-wrap: wrap; border-bottom: 2px solid #2b579a; }
+    .sec-tab {
+      padding: 10px 18px; border: none; background: transparent; cursor: pointer;
+      font-weight: bold; font-size: 13px; color: #333; border-right: 1px solid #ccc;
+    }
+    .sec-tab.active { background: #2b579a; color: #fff; }
+
+    /* Question Sub-header */
+    .q-subheader {
+      background: #f8f9fa; padding: 10px 20px; display: flex; justify-content: space-between;
+      align-items: center; border-bottom: 1px solid #ddd; font-size: 14px;
+    }
+    .mark-badge { color: #28a745; font-weight: bold; }
+    .neg-badge { color: #d9534f; font-weight: bold; margin-left: 10px; }
+
+    /* Question Body */
+    .q-body { padding: 25px; flex: 1; }
+    .q-title { font-size: 17px; font-weight: 600; margin-bottom: 18px; line-height: 1.5; }
+    .q-img { max-width: 300px; margin: 10px 0 15px; border: 1px solid #ccc; border-radius: 4px; }
+    .opt-item {
+      display: block; padding: 12px 15px; border: 1px solid #d0d7de; border-radius: 6px;
+      margin-bottom: 10px; cursor: pointer; transition: 0.15s;
+    }
+    .opt-item:hover { background: #f0f6ff; border-color: #2b579a; }
+    .opt-item input { margin-right: 10px; }
+
+    /* Bottom Action Bar */
+    .action-bar {
+      background: #f1f3f5; padding: 12px 20px; border-top: 1px solid #ccc;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .btn-act { padding: 9px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; border: 1px solid #aaa; font-size: 13px; }
+    .btn-review { background: #6f42c1; color: white; border: none; }
+    .btn-clear { background: #fff; color: #333; }
+    .btn-save { background: #28a745; color: white; border: none; padding: 9px 22px; }
+
+    /* Right Sidebar Palette */
+    .exam-right { background: #f8f9fa; display: flex; flex-direction: column; justify-content: space-between; }
+    .cand-strip { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border-bottom: 1px solid #ddd; }
+    .timer-pill { background: #ffeb3b; color: #000; padding: 5px 10px; border-radius: 4px; font-weight: bold; font-size: 15px; }
+    .status-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; font-size: 12px; background: #e9ecef; }
+    .palette-grid { padding: 15px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; max-height: 320px; overflow-y: auto; }
+    .p-btn { height: 35px; border: 1px solid #999; background: #e0e0e0; font-weight: bold; cursor: pointer; border-radius: 4px; }
+    .p-btn.ans { background: #5cb85c; color: white; border-color: #4cae4c; }
+    .p-btn.not-ans { background: #d9534f; color: white; border-color: #d43f3a; }
+    .p-btn.rev { background: #6f42c1; color: white; border-radius: 50%; }
+    .p-btn.cur { outline: 3px solid #0b1f3a; }
+    .submit-box { padding: 15px; border-top: 1px solid #ccc; background: #fff; text-align: center; }
+    .btn-submit-final { width: 100%; background: #0b1f3a; color: white; padding: 12px; border: none; font-weight: bold; font-size: 15px; border-radius: 5px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <div class="brand-box">
+      <div class="brand-badge">MG</div>
+      <div class="brand-title">
+        <h1>MANN GURU EDUSAT</h1>
+        <p>SSC & DELHI POLICE CONSTABLE EXAM PORTAL</p>
+      </div>
+    </div>
+    <div class="sys-info">
+      <div>System Name: <span>DL-DP-01</span></div>
+      <div id="topTimer" class="timer-pill hidden">Time Left: 90:00</div>
+    </div>
+  </header>
+
+  <!-- ================= SCREEN 1: ATTRACTIVE FIRST PAGE ================= -->
+  <div id="screenLogin" class="hero-wrapper">
+    <!-- Left Promotional Exam Info -->
+    <div class="promo-card">
+      <span class="dp-tag">Target Selection Batch</span>
+      <h2>Delhi Police Constable (Executive) Online Mock Test</h2>
+      <p>असली SSC (TCS iON) कंप्यूटर आधारित परीक्षा पैटर्न पर तैयार किया गया प्रैक्टिस पोर्टल। अपनी स्पीड और एक्यूरेसी को अभी जांचें!</p>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h3>100 Questions</h3>
+          <span>Maximum Marks: 100</span>
+        </div>
+        <div class="stat-box">
+          <h3>90 Minutes</h3>
+          <span>No Sectional Time Lock</span>
+        </div>
+        <div class="stat-box">
+          <h3>+1.00 Mark</h3>
+          <span>For Every Correct Answer</span>
+        </div>
+        <div class="stat-box">
+          <h3>-0.25 Mark</h3>
+          <span>1/4 Negative Marking</span>
+        </div>
+      </div>
+
+      <div style="font-size: 13px; font-weight: bold; color: #f5b041;">SSC Official 4 Sections Included:</div>
+      <div class="sec-pills">
+        <div class="pill">Part A: GK & Current Affairs (50)</div>
+        <div class="pill">Part B: Reasoning (25)</div>
+        <div class="pill">Part C: Numerical Ability (15)</div>
+        <div class="pill">Part D: Computer (10)</div>
+      </div>
+    </div>
+
+    <!-- Right SSC Style Candidate Login -->
+    <div class="login-card">
+      <div class="login-card-header">
+        <span>Candidate Console Login</span>
+        <span>CBT Mode</span>
+      </div>
+      <div class="login-body">
+        <div class="avatar-circle">👮</div>
+        <div class="input-group">
+          <label>Candidate Full Name (अपना नाम लिखें) *</label>
+          <input type="text" id="candName" placeholder="Ex: Rohit Bansal">
+        </div>
+        <div class="input-group">
+          <label>Roll Number / Mobile No.</label>
+          <input type="text" id="candRoll" value="2201004589">
+        </div>
+        <div class="input-group">
+          <label>Password / Exam PIN</label>
+          <input type="password" value="12345678" readonly>
+        </div>
+        <button class="btn-signin" onclick="goToInstructions()">Sign In to Exam Hall ➔</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 2: OFFICIAL SSC INSTRUCTIONS ================= -->
+  <div id="screenInst" class="inst-container hidden">
+    <div class="inst-header">General Instructions (सामान्य निर्देश) - Delhi Police Constable CBT</div>
+    <div class="inst-content">
+      <p><strong>कृपया परीक्षा शुरू करने से पहले निम्नलिखित निर्देशों को ध्यान से पढ़ें:</strong></p>
+      <table class="pattern-table">
+        <tr>
+          <th>Part</th>
+          <th>Subject (विषय)</th>
+          <th>Questions</th>
+          <th>Max Marks</th>
+          <th>Duration</th>
+        </tr>
+        <tr><td>Part-A</td><td>General Knowledge / Current Affairs</td><td>50</td><td>50</td><td rowspan="4"><strong>90 Minutes</strong><br>(Total)</td></tr>
+        <tr><td>Part-B</td><td>Reasoning (तर्कशक्ति)</td><td>25</td><td>25</td></tr>
+        <tr><td>Part-C</td><td>Numerical Ability (गणित)</td><td>15</td><td>15</td></tr>
+        <tr><td>Part-D</td><td>Computer Fundamentals, MS Excel, Word</td><td>10</td><td>10</td></tr>
+      </table>
+
+      <p><strong>Marking Scheme:</strong> प्रत्येक सही उत्तर के लिए <strong>+1 अंक</strong> दिया जाएगा और प्रत्येक गलत उत्तर के लिए <strong>0.25 अंक (1/4)</strong> काटा जाएगा।</p>
+      
+      <h4 style="margin-top: 15px;">Question Palette Symbols (प्रश्नों के रंग का अर्थ):</h4>
+      <div class="legend-row"><span class="sym sym-grey">1</span> आपने अभी तक इस प्रश्न को नहीं देखा है (Not Visited).</div>
+      <div class="legend-row"><span class="sym sym-red">2</span> आपने प्रश्न देखा पर उत्तर नहीं दिया (Not Answered).</div>
+      <div class="legend-row"><span class="sym sym-green">3</span> आपने प्रश्न का उत्तर सेव कर दिया है (Answered).</div>
+      <div class="legend-row"><span class="sym sym-purple">4</span> आपने प्रश्न को पुनर्विचार के लिए मार्क किया है (Marked for Review).</div>
+    </div>
+
+    <div class="inst-footer">
+      <div style="margin-bottom: 10px;">
+        <label><strong>Choose Your Default Language: </strong></label>
+        <select id="defaultLang" style="padding: 6px 12px; font-weight: bold;">
+          <option value="hi">Hindi (हिन्दी)</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+      <label style="font-size: 13px; display: block; cursor: pointer;">
+        <input type="checkbox" id="declCheck"> मैंने सभी निर्देश पढ़ लिए हैं और मैं ईमानदारी से यह मॉक टेस्ट देने के लिए तैयार हूँ।
+      </label>
+      <button class="begin-btn" onclick="startCBT()">I am ready to begin (परीक्षा शुरू करें)</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 3: MAIN CBT INTERFACE ================= -->
+  <div id="screenExam" class="exam-layout hidden">
+    <div class="exam-left">
+      <div>
+        <!-- 4 Section Tabs -->
+        <div class="sec-bar">
+          <button class="sec-tab active" id="tab-A" onclick="switchSection('A')">Part A: GK & Current Affairs</button>
+          <button class="sec-tab" id="tab-B" onclick="switchSection('B')">Part B: Reasoning</button>
+          <button class="sec-tab" id="tab-C" onclick="switchSection('C')">Part C: Numerical Ability</button>
+          <button class="sec-tab" id="tab-D" onclick="switchSection('D')">Part D: Computer</button>
+        </div>
+
+        <!-- Question Header -->
+        <div class="q-subheader">
+          <div><strong id="qNumDisplay">Question No. 1</strong></div>
+          <div>
+            <span>Marks: <span class="mark-badge">+1.00</span> <span class="neg-badge">-0.25</span></span>
+            &nbsp;|&nbsp; Language:
+            <select id="examLang" onchange="renderCurrentQuestion()">
+              <option value="hi">Hindi</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Question Content -->
+        <div class="q-body">
+          <div class="q-title" id="qTextDisplay"></div>
+          <img id="qImgDisplay" class="q-img hidden" src="" alt="Question Figure">
+          <div id="optContainer"></div>
+        </div>
+      </div>
+
+      <!-- Bottom SSC Buttons -->
+      <div class="action-bar">
+        <div>
+          <button class="btn-act btn-review" onclick="markForReview()">Mark for Review & Next</button>
+          <button class="btn-act btn-clear" onclick="clearResponse()">Clear Response</button>
+        </div>
+        <button class="btn-act btn-save" onclick="saveAndNext()">Save & Next ➔</button>
+      </div>
+    </div>
+
+    <!-- Right Palette Panel -->
+    <div class="exam-right">
+      <div>
+        <div class="cand-strip">
+          <div style="font-size:28px;">👮</div>
+          <div>
+            <div style="font-weight:bold; font-size:14px;" id="sideName">Candidate</div>
+            <div style="font-size:12px; color:#555;" id="sideRoll">Roll No:</div>
+          </div>
+        </div>
+
+        <div class="status-summary">
+          <div><span class="sym sym-green" id="cntAns">0</span> Answered</div>
+          <div><span class="sym sym-red" id="cntNotAns">0</span> Not Answered</div>
+          <div><span class="sym sym-grey" id="cntNotVis">0</span> Not Visited</div>
+          <div><span class="sym sym-purple" id="cntRev">0</span> Marked</div>
+        </div>
+
+        <div style="padding: 10px 15px 0; font-weight: bold; font-size: 13px; color:#2b579a;" id="paletteSecTitle">Part A Palette</div>
+        <div class="palette-grid" id="paletteGrid"></div>
+      </div>
+
+      <div class="submit-box">
+        <button class="btn-submit-final" onclick="submitTest()">Submit Final Test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 4: RESULT SCORECARD ================= -->
+  <div id="screenResult" class="inst-container hidden" style="padding: 25px;">
+    <h2 style="text-align:center; color:#0b1f3a;">MANN GURU EDUSAT - Official Score Card</h2>
+    <p style="text-align:center; color:#555; margin-bottom:15px;">Delhi Police Constable CBT Result (<span id="resCandName"></span>)</p>
+    <table class="pattern-table">
+      <tr><th>Total Questions</th><td id="rTotal"></td><th>Attempted</th><td id="rAtt"></td></tr>
+      <tr><th>Correct (+1)</th><td id="rCor" style="color:green; font-weight:bold;"></td><th>Wrong (-0.25)</th><td id="rWrg" style="color:red; font-weight:bold;"></td></tr>
+      <tr><th colspan="2">Final Net Score (after Negative Marking)</th><td colspan="2" id="rScore" style="font-size:22px; font-weight:bold; background:#fff9c4;"></td></tr>
+    </table>
+    <div style="text-align:center; margin-top:20px;">
+      <button class="begin-btn" onclick="location.reload()">Re-Attempt Mock Test</button>
+    </div>
+  </div>
+
+  <script>
+    // === DELHI POLICE 4-SECTION QUESTION BANK (Demo Questions per Section) ===
+    // Aap isi tarah Part A me 50, B me 25, C me 15, D me 10 questions jod sakte hain
+    const questions = [
+      {
+        sec: 'A',
+        hi: "भारतीय संविधान का कौन-सा अनुच्छेद 'अस्पृश्यता के उन्मूलन' से संबंधित है?",
+        en: "Which Article of the Indian Constitution deals with the 'Abolition of Untouchability'?",
+        img: "",
+        opts_hi: ["अनुच्छेद 16", "अनुच्छेद 17", "अनुच्छेद 18", "अनुच्छेद 19"],
+        opts_en: ["Article 16", "Article 17", "Article 18", "Article 19"],
+        ans: 1
+      },
+      {
+        sec: 'B',
+        hi: "श्रृंखला को पूरा करें: 5, 11, 23, 47, ?",
+        en: "Complete the series: 5, 11, 23, 47, ?",
+        img: "",
+        opts_hi: ["95", "93", "96", "90"],
+        opts_en: ["95", "93", "96", "90"],
+        ans: 0
+      },
+      {
+        sec: 'C',
+        hi: "एक वस्तु को ₹450 में बेचने पर 10% की हानि होती है। वस्तु का क्रय मूल्य क्या है?",
+        en: "By selling an article for ₹450, a man loses 10%. Find the cost price of the article.",
+        img: "",
+        opts_hi: ["₹480", "₹500", "₹520", "₹490"],
+        opts_en: ["₹480", "₹500", "₹520", "₹490"],
+        ans: 1
+      },
+      {
+        sec: 'D',
+        hi: "MS Excel में नई वर्कशीट इंसर्ट करने की शॉर्टकट कुंजी (Shortcut Key) क्या है?",
+        en: "What is the shortcut key to insert a new worksheet in MS Excel?",
+        img: "",
+        opts_hi: ["Shift + F11", "Ctrl + N", "Alt + F1", "Ctrl + F11"],
+        opts_en: ["Shift + F11", "Ctrl + N", "Alt + F1", "Ctrl + F11"],
+        ans: 0
+      }
+    ];
+
+    let curIdx = 0;
+    let userAns = new Array(questions.length).fill(null);
+    // status: 0=Not Visited, 1=Not Answered, 2=Answered, 3=Marked for Review
+    let qStatus = new Array(questions.length).fill(0);
+    let timeRemaining = 90 * 60; // 90 Minutes
+    let timerRef;
+
+    function goToInstructions() {
+      const name = document.getElementById('candName').value.trim();
+      const roll = document.getElementById('candRoll').value.trim();
+      if (!name) { alert("कृपया अपना नाम दर्ज करें!"); return; }
+      document.getElementById('sideName').innerText = name;
+      document.getElementById('resCandName').innerText = name;
+      document.getElementById('sideRoll').innerText = "Roll: " + roll;
+      document.getElementById('screenLogin').classList.add('hidden');
+      document.getElementById('screenInst').classList.remove('hidden');
+    }
+
+    function startCBT() {
+      if (!document.getElementById('declCheck').checked) {
+        alert("कृपया परीक्षा शुरू करने से पहले घोषणा (Checkbox) पर टिक करें!");
+        return;
+      }
+      document.getElementById('examLang').value = document.getElementById('defaultLang').value;
+      document.getElementById('screenInst').classList.add('hidden');
+      document.getElementById('screenExam').classList.remove('hidden');
+      document.getElementById('topTimer').classList.remove('hidden');
+
+      qStatus[0] = 1;
+      renderCurrentQuestion();
+      timerRef = setInterval(() => {
+        timeRemaining--;
+        let m = Math.floor(timeRemaining / 60);
+        let s = timeRemaining % 60;
+        document.getElementById('topTimer').innerText = `Time Left: ${m}:${s < 10 ? '0'+s : s}`;
+        if (timeRemaining <= 0) submitTest();
+      }, 1000);
+    }
+
+    function renderCurrentQuestion() {
+      const q = questions[curIdx];
+      const lang = document.getElementById('examLang').value;
+
+      // Update active section tab
+      ['A','B','C','D'].forEach(s => {
+        document.getElementById('tab-'+s).classList.toggle('active', q.sec === s);
+      });
+      document.getElementById('paletteSecTitle').innerText = `Part ${q.sec} Question Palette`;
+      document.getElementById('qNumDisplay').innerText = `Question No. ${curIdx + 1}`;
+      document.getElementById('qTextDisplay').innerText = lang === 'hi' ? q.hi : q.en;
+
+      const opts = lang === 'hi' ? q.opts_hi : q.opts_en;
+      const optBox = document.getElementById('optContainer');
+      optBox.innerHTML = '';
+      opts.forEach((txt, i) => {
+        const chk = userAns[curIdx] === i ? 'checked' : '';
+        optBox.innerHTML += `
+          <label class="opt-item">
+            <input type="radio" name="qOpt" value="${i}" ${chk}> ${txt}
+          </label>
+        `;
+      });
+
+      updatePalette();
+    }
+
+    function getSelectedOption() {
+      const sel = document.querySelector('input[name="qOpt"]:checked');
+      return sel ? parseInt(sel.value) : null;
+    }
+
+    function saveAndNext() {
+      const val = getSelectedOption();
+      if (val !== null) {
+        userAns[curIdx] = val;
+        qStatus[curIdx] = 2; // Answered (Green)
+      } else {
+        qStatus[curIdx] = 1; // Not Answered (Red)
+      }
+      moveNext();
+    }
+
+    function markForReview() {
+      const val = getSelectedOption();
+      userAns[curIdx] = val;
+      qStatus[curIdx] = 3; // Purple
+      moveNext();
+    }
+
+    function clearResponse() {
+      userAns[curIdx] = null;
+      qStatus[curIdx] = 1;
+      renderCurrentQuestion();
+    }
+
+    function moveNext() {
+      if (curIdx < questions.length - 1) curIdx++;
+      else curIdx = 0;
+      if (qStatus[curIdx] === 0) qStatus[curIdx] = 1;
+      renderCurrentQuestion();
+    }
+
+    function switchSection(secCode) {
+      const idx = questions.findIndex(q => q.sec === secCode);
+      if (idx !== -1) {
+        curIdx = idx;
+        if (qStatus[curIdx] === 0) qStatus[curIdx] = 1;
+        renderCurrentQuestion();
+      }
+    }
+
+    function jumpToQ(i) {
+      curIdx = i;
+      if (qStatus[curIdx] === 0) qStatus[curIdx] = 1;
+      renderCurrentQuestion();
+    }
+
+    function updatePalette() {
+      const grid = document.getElementById('paletteGrid');
+      grid.innerHTML = '';
+      const curSec = questions[curIdx].sec;
+
+      questions.forEach((q, i) => {
+        if (q.sec === curSec) {
+          let cls = 'p-btn';
+          if (qStatus[i] === 1) cls += ' not-ans';
+          if (qStatus[i] === 2) cls += ' ans';
+          if (qStatus[i] === 3) cls += ' rev';
+          if (i === curIdx) cls += ' cur';
+          grid.innerHTML += `<button class="${cls}" onclick="jumpToQ(${i})">${i + 1}</button>`;
+        }
+      });
+
+      document.getElementById('cntNotVis').innerText = qStatus.filter(s => s === 0).length;
+      document.getElementById('cntNotAns').innerText = qStatus.filter(s => s === 1).length;
+      document.getElementById('cntAns').innerText = qStatus.filter(s => s === 2).length;
+      document.getElementById('cntRev').innerText = qStatus.filter(s => s === 3).length;
+    }
+
+    function submitTest() {
+      clearInterval(timerRef);
+      let att = 0, cor = 0, wrg = 0;
+      questions.forEach((q, i) => {
+        if (userAns[i] !== null) {
+          att++;
+          if (userAns[i] === q.ans) cor++;
+          else wrg++;
+        }
+      });
+      const net = (cor * 1) - (wrg * 0.25);
+
+      document.getElementById('screenExam').classList.add('hidden');
+      document.getElementById('topTimer').classList.add('hidden');
+      document.getElementById('screenResult').classList.remove('hidden');
+
+      document.getElementById('rTotal').innerText = questions.length;
+      document.getElementById('rAtt').innerText = att;
+      document.getElementById('rCor').innerText = cor;
+      document.getElementById('rWrg').innerText = wrg;
+      document.getElementById('rScore').innerText = net.toFixed(2) + " / " + questions.length;
+    }
+  </script>
+</body>
+</html>
