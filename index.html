@@ -907,40 +907,57 @@
     }
   </script>
 </body>
-  <!-- Top Highlighted AI Mentor Bar (Auto-Hide During Mock Test) -->
+ <!-- Right-Side AI Mentor Box (Auto-Hide During Mock Test) -->
 <style>
-  #ai-top-bar {
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    background: linear-gradient(90deg, #1b365d, #0f2544);
-    color: #ffffff;
-    padding: 10px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  #ai-side-box {
+    position: fixed;
+    top: 115px;
+    right: 20px;
+    width: 250px;
+    background: #ffffff;
+    border: 2px solid #1b365d;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    z-index: 9998;
+    text-align: center;
     font-family: Arial, sans-serif;
   }
-  #ai-top-bar span {
-    font-size: 15px;
+  #ai-side-box .ai-hindi {
+    font-size: 13px;
     font-weight: bold;
+    color: #1b365d;
+    margin: 0 0 5px 0;
+    line-height: 1.4;
   }
-  #ai-top-btn {
+  #ai-side-box .ai-eng {
+    font-size: 12px;
+    color: #444;
+    margin: 0 0 10px 0;
+    line-height: 1.35;
+  }
+  #ai-open-btn {
+    width: 100%;
     background: #ff9800;
     color: #111;
     border: none;
     border-radius: 20px;
-    padding: 7px 16px;
+    padding: 8px 14px;
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   }
-  #ai-top-btn:hover {
+  #ai-open-btn:hover {
     background: #ffa726;
+  }
+  @media (max-width: 900px) {
+    #ai-side-box {
+      position: static;
+      width: 90%;
+      max-width: 380px;
+      margin: 12px auto;
+    }
   }
   #ai-modal-overlay {
     display: none;
@@ -962,7 +979,7 @@
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
   }
   #ai-close-btn {
     position: absolute;
@@ -986,9 +1003,10 @@
   }
 </style>
 
-<div id="ai-top-bar">
-  <span>🤖 Defence & Police Exam Doubt?</span>
-  <button id="ai-top-btn" type="button">Ask AI Mentor</button>
+<div id="ai-side-box">
+  <p class="ai-hindi">किसी भी डिफेंस एग्जाम या भर्ती से संबंधित कोई भी डाउट हो तो यहाँ पूछें।</p>
+  <p class="ai-eng">Have any doubt regarding any Defence exam or recruitment? Ask here.</p>
+  <button id="ai-open-btn" type="button">🤖 Ask AI Mentor</button>
 </div>
 
 <div id="ai-modal-overlay">
@@ -1000,9 +1018,9 @@
 
 <script>
   (function () {
-    const bar = document.getElementById("ai-top-bar");
+    const sideBox = document.getElementById("ai-side-box");
     const overlay = document.getElementById("ai-modal-overlay");
-    const openBtn = document.getElementById("ai-top-btn");
+    const openBtn = document.getElementById("ai-open-btn");
     const closeBtn = document.getElementById("ai-close-btn");
 
     openBtn.addEventListener("click", function () {
@@ -1048,10 +1066,10 @@
 
     setInterval(function () {
       if (isMockTestRunning()) {
-        bar.style.display = "none";
+        sideBox.style.display = "none";
         overlay.style.display = "none";
       } else {
-        bar.style.display = "flex";
+        sideBox.style.display = "block";
       }
     }, 500);
   })();
