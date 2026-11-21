@@ -907,4 +907,153 @@
     }
   </script>
 </body>
+  <!-- Top Highlighted AI Mentor Bar (Auto-Hide During Mock Test) -->
+<style>
+  #ai-top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background: linear-gradient(90deg, #1b365d, #0f2544);
+    color: #ffffff;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    font-family: Arial, sans-serif;
+  }
+  #ai-top-bar span {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  #ai-top-btn {
+    background: #ff9800;
+    color: #111;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  #ai-top-btn:hover {
+    background: #ffa726;
+  }
+  #ai-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+  }
+  #ai-modal-box {
+    width: 94%;
+    max-width: 500px;
+    height: 82vh;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+  }
+  #ai-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: #e53935;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+  }
+  #ai-modal-box iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<div id="ai-top-bar">
+  <span>🤖 Defence & Police Exam Doubt?</span>
+  <button id="ai-top-btn" type="button">Ask AI Mentor</button>
+</div>
+
+<div id="ai-modal-overlay">
+  <div id="ai-modal-box">
+    <button id="ai-close-btn" type="button">✖</button>
+    <iframe src="ai-mentor.html"></iframe>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const bar = document.getElementById("ai-top-bar");
+    const overlay = document.getElementById("ai-modal-overlay");
+    const openBtn = document.getElementById("ai-top-btn");
+    const closeBtn = document.getElementById("ai-close-btn");
+
+    openBtn.addEventListener("click", function () {
+      overlay.style.display = "flex";
+    });
+    closeBtn.addEventListener("click", function () {
+      overlay.style.display = "none";
+    });
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) overlay.style.display = "none";
+    });
+
+    function isVisible(el) {
+      if (!el) return false;
+      const style = window.getComputedStyle(el);
+      return el.offsetParent !== null && style.display !== "none" && style.visibility !== "hidden";
+    }
+
+    function isMockTestRunning() {
+      if (document.fullscreenElement) return true;
+
+      const timers = document.querySelectorAll("#timer, .timer, #countdown, .countdown, [id*='timer'], [class*='timer']");
+      for (const t of timers) {
+        if (isVisible(t) && /\d{1,2}:\d{2}/.test(t.textContent || "")) return true;
+      }
+
+      const btns = document.querySelectorAll("button, input[type='button']");
+      for (const b of btns) {
+        if (!isVisible(b)) continue;
+        const txt = (b.textContent || b.value || "").toLowerCase();
+        if (
+          txt.includes("save & next") ||
+          txt.includes("mark for review") ||
+          txt.includes("submit test") ||
+          txt.includes("submit exam") ||
+          txt.includes("clear response")
+        ) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    setInterval(function () {
+      if (isMockTestRunning()) {
+        bar.style.display = "none";
+        overlay.style.display = "none";
+      } else {
+        bar.style.display = "flex";
+      }
+    }, 500);
+  })();
+</script>
 </html>
