@@ -88,7 +88,7 @@
       <div class="msg ai-msg">Namaste! Main aapka Defence & Police Exam AI Mentor hoon. NDA, CDS, AFCAT, Agniveer, SSC ya Delhi Police exam se juda koi bhi sawaal poochein.</div>
     </div>
     <div class="input-area">
-      <input type="text" id="userInput" placeholder="Apna sawaal yahan likhein..." />
+      <input type="text" id="userInput" placeholder="Ask..." />
       <button onclick="sendMessage()">Send</button>
     </div>
   </div>
@@ -119,7 +119,7 @@
       addMessage(text, "user-msg");
       userInput.value = "";
 
-      const loadingMsg = addMessage("Soch raha hoon...", "ai-msg");
+      const loadingMsg = addMessage("Thinking...", "ai-msg");
 
       try {
         const res = await fetch(WORKER_URL, {
@@ -130,7 +130,7 @@
         const data = await res.json();
         loadingMsg.textContent = data.reply;
       } catch (err) {
-        loadingMsg.textContent = "Connection error! Thodi der baad dobara try karein.";
+        loadingMsg.textContent = "Connection error! Please try again.";
       }
       chatBox.scrollTop = chatBox.scrollHeight;
     }
