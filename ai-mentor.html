@@ -15,7 +15,7 @@
     }
     .chat-container {
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       background: #ffffff;
       display: flex;
       flex-direction: column;
@@ -24,10 +24,24 @@
     .chat-header {
       background: #1b365d;
       color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 18px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 17px;
       font-weight: bold;
+    }
+    .clear-btn {
+      background: rgba(255, 255, 255, 0.18);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .clear-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
     }
     .chat-box {
       flex: 1;
@@ -40,15 +54,16 @@
     .msg {
       padding: 10px 14px;
       border-radius: 12px;
-      max-width: 80%;
-      line-height: 1.5;
-      white-space: pre-wrap;
+      max-width: 82%;
+      line-height: 1.55;
       font-size: 15px;
+      word-wrap: break-word;
     }
     .user-msg {
       background: #1b365d;
       color: white;
       align-self: flex-end;
+      white-space: pre-wrap;
     }
     .ai-msg {
       background: #e9eef5;
@@ -79,45 +94,86 @@
       font-size: 15px;
       cursor: pointer;
     }
+    .input-area button:disabled {
+      background: #7b8fa8;
+      cursor: not-allowed;
+    }
   </style>
 </head>
 <body>
   <div class="chat-container">
-    <div class="chat-header">Defence & Police AI Mentor</div>
+    <div class="chat-header">
+      <span>Defence & Police AI Mentor</span>
+      <button class="clear-btn" onclick="clearChat()">New Chat</button>
+    </div>
     <div class="chat-box" id="chatBox">
       <div class="msg ai-msg">Namaste! Main aapka Defence & Police Exam AI Mentor hoon. NDA, CDS, AFCAT, Agniveer, SSC ya Delhi Police exam se juda koi bhi sawaal poochein.</div>
     </div>
     <div class="input-area">
       <input type="text" id="userInput" placeholder="Ask..." />
-      <button onclick="sendMessage()">Send</button>
+      <button id="sendBtn" onclick="sendMessage()">Send</button>
     </div>
   </div>
 
   <script>
     const WORKER_URL = "https://defence-ai.yadavmanitandr.workers.dev";
+    const WELCOME_MSG = "Namaste! Main aapka Defence & Police Exam AI Mentor hoon. NDA, CDS, AFCAT, Agniveer, SSC ya Delhi Police exam se juda koi bhi sawaal poochein.";
 
     const chatBox = document.getElementById("chatBox");
     const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    let chatHistory = [];
+    let isSending = false;
 
     userInput.addEventListener("keypress", function (e) {
-      if (e.key === "Enter") sendMessage();
+      if (e.key === "Enter" && !isSending) sendMessage();
     });
 
-    function addMessage(text, className) {
+    function formatText(text) {
+      const escaped = text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+      return escaped
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/^\s*[\*\-]\s+/gm, "• ")
+        .replace(/\n/g, "<br>");
+    }
+
+    function addMessage(text, className, isHtml = false) {
       const div = document.createElement("div");
       div.className = "msg " + className;
-      div.textContent = text;
+      if (isHtml) {
+        div.innerHTML = formatText(text);
+      } else {
+        div.textContent = text;
+      }
       chatBox.appendChild(div);
       chatBox.scrollTop = chatBox.scrollHeight;
       return div;
     }
 
+    function clearChat() {
+      chatHistory = [];
+      chatBox.innerHTML = "";
+      addMessage(WELCOME_MSG, "ai-msg");
+      userInput.focus();
+    }
+
     async function sendMessage() {
       const text = userInput.value.trim();
-      if (!text) return;
+      if (!text || isSending) return;
+
+      isSending = true;
+      sendBtn.disabled = true;
+      userInput.disabled = true;
 
       addMessage(text, "user-msg");
       userInput.value = "";
+
+      chatHistory.push({ role: "user", content: text });
+      if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
 
       const loadingMsg = addMessage("Thinking...", "ai-msg");
 
@@ -125,14 +181,23 @@
         const res = await fetch(WORKER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: text }),
+          body: JSON.stringify({ messages: chatHistory }),
         });
         const data = await res.json();
-        loadingMsg.textContent = data.reply;
+        const replyText = data.reply || "Please try again.";
+        loadingMsg.innerHTML = formatText(replyText);
+        chatHistory.push({ role: "assistant", content: replyText });
+        if (chatHistory.length > 10) chatHistory = chatHistory.slice(-10);
       } catch (err) {
         loadingMsg.textContent = "Connection error! Please try again.";
+        chatHistory.pop();
+      } finally {
+        isSending = false;
+        sendBtn.disabled = false;
+        userInput.disabled = false;
+        userInput.focus();
+        chatBox.scrollTop = chatBox.scrollHeight;
       }
-      chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
 </body>
